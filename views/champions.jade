@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  for champion in champions
+    div(class='panel panel-default col-sm-12 col-md-4')
+      div(class='panel-heading')
+        a(href='/champions/#{champion.name}')= champion.name
+      div(class='panel-body')
+        image(src=' #{champion.image}')
+        for mastery in champion.masteries
+          li= mastery
