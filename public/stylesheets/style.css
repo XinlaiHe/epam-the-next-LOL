@@ -1,0 +1,51 @@
+body {
+
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+/* Navigation style */
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom, #D9260F 0, #B81208 100%);
+  border-color: #666666;
+}
+
+.navbar-inverse .navbar-brand {
+  color: yellow !important;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: orange;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+#navbar ul li a{
+  color:white;
+}
+.navbar-inverse{
+  margin-bottom:0 !important;
+  border-color:#B31111 !important;
+}
+
+.cover{
+
+  width:100%;
+  min-height:750px;
+  background-image:url('/images/LOL.jpg');
+  background-size: cover;
+}
