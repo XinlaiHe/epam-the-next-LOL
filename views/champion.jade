@@ -9,9 +9,39 @@ block content
           li= mastery
       div(class="form-group")
         div(class="col-sm-4 col-sm-offset-2")
-           button(type="submit" class="btn btn-success btn-lg") Update
+           button(type="submit" class="btn btn-success btn-lg" onclick="showUpdateBox('#{champion.name}','#{champion.image}','#{champion.masteries}')") Update
 
         div(class="col-sm-4 col-sm-offset-2")
            a(class="btn btn-lg btn-danger" onclick="del('#{champion.name}')") Delete
+
+
+  div(class='panel panel-default col-sm-8 col-sm-offset-2 updatepanel')
+    div(class='panel-heading')
+      div(class='panel-title') Update Champion
+
+    form(class="form-horizontal" role="form" method='PUT' id='updateform')
+     div(class="form-group")
+        label(for="name" class="col-sm-2 control-label") Name
+        div(class="col-sm-10")
+           input(type="text" class="form-control" name="name"
+              placeholder="name")
+     div(class="form-group")
+        label(for="image" class="col-sm-2 control-label") Image
+        div(class="col-sm-10")
+           input(type="text" class="form-control" name="image"
+              placeholder="image")
+     div(class="form-group")
+        label(for="masteries" class="col-sm-2 control-label") Masteries
+        div(class="col-sm-10")
+           input(type="text" class="form-control" name="masteries"
+              placeholder="masteries")
+
+
+     div(class="form-group")
+        div(class="col-sm-4 col-sm-offset-2")
+           button(type="submit" class="btn btn-success btn-lg") Update
+
+        div(class="col-sm-4 col-sm-offset-2")
+           a(class="btn btn-lg btn-default" onclick="hideUpdateBox()") Cancel
 
   script(src='/javascripts/main.js')

@@ -64,3 +64,14 @@ body {
 #addform{
   margin-top:30px;
 }
+.updatepanel{
+  display:none;
+}
+.updatebox{
+  display:none;
+  position:fixed;
+  left:25%;
+  top:200px;
+  z-index:999;
+  width:50%;
+}

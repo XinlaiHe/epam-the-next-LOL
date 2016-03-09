@@ -5,6 +5,16 @@ var mongoose = require("mongoose");
 
 var Champion = mongoose.model("Champion");
 
+
+/* update Champion. */
+router.put('/champions/:name', function(req, res, next){
+  var update = {$set: req.body};
+  Champion.update({"name" : req.params.name}, update, function(err){
+      if(err) throw err;
+      else res.send("success");
+  });
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'The Next LOL' });
@@ -14,7 +24,11 @@ router.get('/', function(req, res, next) {
 router.get('/champions', function(req, res, next) {
 
   Champion.find({}, function(err, data){
-    res.render('champions', { champions: data, title: 'Champions' });
+    if(req.query.action){
+        res.render('champions', { champions: data, title: 'Champions', action: req.query.action});
+    }else{
+        res.render('champions', { champions: data, title: 'Champions'});
+    }
   })
 });
 
@@ -53,4 +67,6 @@ router.delete('/champions/:name', function(req, res, next){
       else res.send("success");
   });
 });
+
+
 module.exports = router;
