@@ -6,14 +6,31 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 var mongoose = require("mongoose");
+var passport = require("passport");
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var flash = require('express-flash');
+
 
 //CONNECT TO MONGODB set the schema
 mongoose.connect('mongodb://localhost/lol');
 
 // register the champion schema
 require('./models/champion');
+// register the user schema
+require('./models/user');
 
 var app = express();
+
+//Initialize passport
+app.use(express.static('public'));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -65,5 +82,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
+
 
 module.exports = app;

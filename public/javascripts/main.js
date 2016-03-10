@@ -9,8 +9,10 @@ $("#addform").submit(function(e){
     data: $("#addform").serialize(),
     url: "/champions",
     success: function(data){
-
-        window.location.href="/champions?action=add successfully";
+        if(data == 'user not loin')
+           window.location.href="/users/login";
+        else
+           window.location.href="/champions?action=add successfully";
     },
     error: function(data){
 
@@ -25,8 +27,10 @@ function del(cha){
     method: 'delete',
     url: "/champions/"+cha,
     success: function(data){
-
-        window.location.href="/champions?action=delete successfully";
+        if(data == "user not login")
+          window.location.href="/users/login";
+        else
+          window.location.href="/champions?action=delete successfully";
     },
     error: function(data){
 
@@ -59,8 +63,11 @@ $('#updateform').submit(function(e){
     url: "/champions/"+name,
     data: $('#updateform').serialize(),
     success: function(data){
-
-        window.location.href="/champions?action=update successfully";
+        if(data == 'user not login'){
+            window.location.href="/users/login";
+        }else{
+            window.location.href="/champions?action=update successfully";
+        }
     },
     error: function(data){
 

@@ -24,9 +24,16 @@ html
               a(href="/champions")  Home
             li
               a(href="/champions/new")  Add New
-            li
-              a(href="/register") Register
+            if !user
+              li
+                a(href="/users/login") Login
+              li
+                a(href="/users/register") Register
             li
               a(href="/about") About
+            if user
+              li(class='username')
+                a(href='/users/logout')= user.username
+                            , Logout?
 
     block content

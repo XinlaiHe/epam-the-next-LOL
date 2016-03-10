@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  div(class='content col-sm-6 col-sm-offset-3')
+      h2 Login
+      p Login for The The Next below...
+      form(action="/users/login" method="post")
+        div(class="form-group")
+          label(for="exampleInputEmail1") Name
+          input(name="username" type="username" class="form-control" id="exampleInputName1" placeholder="Full Name")
+
+        div(class="form-group")
+          label(for="exampleInputPassword1") Password
+          input(name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password")
+
+        button(type="submit" class="btn btn-inverse btn-lg") Login

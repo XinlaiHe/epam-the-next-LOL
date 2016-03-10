@@ -8,16 +8,22 @@ var Champion = mongoose.model("Champion");
 
 /* update Champion. */
 router.put('/champions/:name', function(req, res, next){
-  var update = {$set: req.body};
-  Champion.update({"name" : req.params.name}, update, function(err){
+
+  if(req.isAuthenticated()){
+      var update = {$set: req.body};
+      Champion.update({"name" : req.params.name}, update, function(err){
       if(err) throw err;
       else res.send("success");
-  });
+      });
+  }else{
+      res.send("user not login");
+  }
+
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'The Next LOL' });
+  res.render('index', { title: 'The Next LOL' , user: req.user });
 });
 
 /* GET champions page. */
@@ -25,9 +31,9 @@ router.get('/champions', function(req, res, next) {
 
   Champion.find({}, function(err, data){
     if(req.query.action){
-        res.render('champions', { champions: data, title: 'Champions', action: req.query.action});
+        res.render('champions', { champions: data, title: 'Champions', action: req.query.action, user: req.user });
     }else{
-        res.render('champions', { champions: data, title: 'Champions'});
+        res.render('champions', { champions: data, title: 'Champions', action: req.query.action, user: req.user });
     }
   })
 });
@@ -35,7 +41,12 @@ router.get('/champions', function(req, res, next) {
 /* GET add champion page. */
 router.get('/champions/new', function(req, res, next) {
 
-   res.render('addChampion', {title : "Add New Champion"});
+   if(req.isAuthenticated()){
+       res.render('addChampion', {title : "Add New Champion", user: req.user });
+   }else{
+      res.redirect('/users/login');
+   }
+
 
 });
 
@@ -43,7 +54,7 @@ router.get('/champions/new', function(req, res, next) {
 router.get('/champions/:name', function(req, res, next) {
 
   Champion.findOne({"name" : req.params.name}, function(err, data){
-    res.render('champion', { champion: data, title: req.params.name });
+    res.render('champion', { champion: data, title: req.params.name, user: req.user  });
   })
 });
 
@@ -51,21 +62,30 @@ router.get('/champions/:name', function(req, res, next) {
 
 /* Post Add Champion. */
 router.post('/champions', function(req, res, next) {
-    req.body.masteries = req.body.masteries.split(",");
-    var champian = new Champion(req.body);
-    champian.save(function(err){
-      if(err) throw err;
-      else  res.send("success");
+  if(req.isAuthenticated()){
+      req.body.masteries = req.body.masteries.split(",");
+      var champian = new Champion(req.body);
+      champian.save(function(err){
+        if(err) throw err;
+        else  res.send("success");
    });
+  }else{
+       res.send("user not login");
+  }
+
 
 });
 /* delete Champion. */
 router.delete('/champions/:name', function(req, res, next){
-
-  Champion.remove({"name" : req.params.name}, function(err){
+  if(req.isAuthenticated()){
+    Champion.remove({"name" : req.params.name}, function(err){
       if(err) throw err;
       else res.send("success");
-  });
+    });
+  }else{
+    res.send('user not login');
+  }
+
 });
 
 
