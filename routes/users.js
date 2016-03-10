@@ -40,7 +40,7 @@ router.post('/register', function(req, res, next) {
   var user = new User(req.body);
   user.save(function(err){
     if(err) throw err;
-    else res.redirect("/champions");
+    else res.redirect("/users/login");
   });
 });
 
